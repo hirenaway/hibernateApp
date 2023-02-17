@@ -15,8 +15,8 @@ public class EmployeeEmailVerification {
 	public static void sendOtpEmail(String toEmailId, int otp) {
 	
 		//sender details
-		final String  fromEmailId = "hirenksolanki95@gmail.com"; 
-		final String generatedPassword = "jgndgckdcyidnoff";
+		final String  fromEmailId = ""; 
+		final String generatedPassword = "";
 		
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", "true");

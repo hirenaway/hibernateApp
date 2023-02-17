@@ -27,12 +27,14 @@
 			</tr>
 			<tr>
 				<td>Last Name:</td>
-				<td><input type="text" name="lastName" value="<%=em.getLastName()%>">
+				<td>
+					<input type="text" name="lastName" value="<%=em.getLastName()%>">
 				</td>
 			</tr>
 			<tr>
 				<td>Mobile:</td>
-				<td><input type="text" name="mobile" value="<%=em.getMobile()%>">
+				<td>
+					<input type="text" name="mobile" value="<%=em.getMobile()%>">
 				</td>
 			</tr>
 			<tr>

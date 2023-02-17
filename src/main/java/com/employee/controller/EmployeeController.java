@@ -90,7 +90,7 @@ public class EmployeeController extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
-
+ 
 	protected void sendOTPmethod(Employee employee, HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		if (employee != null) {
