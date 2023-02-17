@@ -35,7 +35,7 @@ public class EmployeeDao {
 		return selectedEmployee;
 	}
 	
-	public static void deleteEmployee(int id) {
+	public static Employee deleteEmployee(int id) {
 		SessionFactory sessionFactory = EmployeeUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -43,25 +43,15 @@ public class EmployeeDao {
 		session.delete(selectedEmployee);
 		session.getTransaction().commit();
 		session.close();
+		return selectedEmployee;
 	}
 
-	public static Employee authenticateEmailPassword(String email, String password) {
+	public static Employee checkEmail(String email) {
 		SessionFactory sessionFactory = EmployeeUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		String hql = "FROM Employee E WHERE E.email = " +"'"+ email +"'"+ "and E.password = "+"'"+ password+ "'";
-		List<Employee> results = session.createQuery(hql).list();
+		Employee result = (Employee) session.createQuery("FROM Employee E WHERE E.email = :e").setParameter("e", email).uniqueResult();
 		session.close();
-		return results.get(0);
-	}
-
-	public static int checkEmail(String email) {
-		SessionFactory sessionFactory = EmployeeUtil.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		String hql = "FROM Employee E WHERE E.email = " +"'"+ email +"'";
-		List<Employee> results = session.createQuery(hql).list();
-		session.close();
-		return !results.isEmpty() ? 1 : 0;
+		return result;
 	}
 }

@@ -4,44 +4,21 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ include file="index.jsp" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>List of employee</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<style type="text/css">
-tr, td {
-	padding: 10px !important;
-}
-</style>
 </head>
 <body>
-	<%
-	String message = "";
-	if (request.getAttribute("message") != null) {
-		message = (String) request.getAttribute("message");
-	}
-	%>
-	<form>
-		<table>
-			<tr>
-				<td><h2>
-						<%
-						if (StringUtils.isNoneBlank(message)) {
-						%>
-						<%=message%>
-						<%
-						}
-						%>
-					</h2></td>
-			</tr>
-		</table>
-	</form>
+<b style="color:blue;" >
+		<%
+		if (request.getAttribute("message") != null) {
+			out.println(request.getAttribute("message"));
+		}
+		%>
+</b>
 	<form method="post" action="EmployeeController">
 		<table width=100% border="1" cellpadding="10px" cellspacing="10px">
 			<tr>
@@ -57,24 +34,24 @@ tr, td {
 			<%
 			List<Employee> employeeList = EmployeeDao.getAllEmployee();
 			if (!employeeList.isEmpty()) {
-				for (Employee e : employeeList) {
+				for (Employee em : employeeList) {
 			%>
 			<tr>
-				<td><%=e.getId()%></td>
-				<td><%=e.getFirstName()%></td>
-				<td><%=e.getLastName()%></td>
-				<td><%=e.getMobile()%></td>
-				<td><%=e.getEmail()%></td>
-				<td><%=e.getPassword()%></td>
+				<td><%=em.getId()%></td>
+				<td><%=em.getFirstName()%></td>
+				<td><%=em.getLastName()%></td>
+				<td><%=em.getMobile()%></td>
+				<td><%=em.getEmail()%></td>
+				<td><%=em.getPassword()%></td>
 				<td>
 					<form name="edit" method="post" action="EmployeeController">
-						<input type="hidden" name="id" value="<%=e.getId()%>"> <input
+						<input type="hidden" name="id" value="<%=em.getId()%>"> <input
 							type="submit" name="action" value="Edit" class="btn btn-primary" />
 					</form>
 				</td>
 				<td>
 					<form name="delete" method="post" action="EmployeeController">
-						<input type="hidden" name="id" value="<%=e.getId()%>"> <input
+						<input type="hidden" name="id" value="<%=em.getId()%>"> <input
 							type="submit" name="action" value="Delete"
 							class="btn btn-danger" />
 					</form>

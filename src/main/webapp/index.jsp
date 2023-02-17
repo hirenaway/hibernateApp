@@ -18,53 +18,27 @@ tr, td {
 </style>
 </head>
 <body>
-	<%
-	Boolean isLogin = false;
-	Employee e = null;
-	if (request.getAttribute("employee") != null && request.getAttribute("isLogin") != null) {
-		e = (Employee) request.getAttribute("employee");
-		isLogin = (Boolean) request.getAttribute("isLogin");
-	}
-	String message = "Welcome to the app";
-	%>
-	<form method="post" action="EmployeeController">
-		<td><h2>
-				<%
-				if (isLogin && e != null) {
+	<h2> 
+		<%
+		Employee employee =  null;
+		if(session != null){
+			if(session.getAttribute("employee") != null){
+				employee = (Employee) session.getAttribute("employee");
+				
+		%>
+			<a href="registration.jsp" class="btn btn-dark" > Register an Employee </a> || <a href="logout.jsp" class="btn btn-dark"> Log out </a> || <a href="view-all-employee.jsp" class="btn btn-dark"> View All Employee </a> || <a href="reset-password.jsp" class="btn btn-dark"> Change Password </a>
+		<%	
+			} else{
 				%>
-				<%=message +" " + e.getFirstName() + "!"%>
-				<%
-				}
-				%>
-			</h2></td>
-	</form>
-	<form method="post" action="EmployeeController">
-		<tr>
-			<td><a href="registration.jsp"> Register an Employee </a></td>
-		</tr>
-	</form>
-	<form method="post" action="EmployeeController">
-		<tr>
-			<td><a href="view-all-employee.jsp"> View all Employee </a></td>
-		</tr>
-	</form>
-	<form method="post" action="EmployeeController">
-		<tr>
-			<td>
-			<%
-			if (isLogin) {
-			%> <a href="index.jsp"> Log out </a>
-			</td>
-			<%
-			} else {
-			%>
-			<a href="login.jsp"> Log in </a>
-			</td>
-			<%
+					<a href="registration.jsp" class="btn btn-dark" > Register an Employee </a> || <a href="login.jsp" class="btn btn-dark"> Log in </a>
+				<% 
 			}
+		} else{
 			%>
-			</td>
-		</tr>
-	</form>
+				<a href="registration.jsp" class="btn btn-dark" > Register an Employee </a> || <a href="login.jsp" class="btn btn-dark"> Log in </a>
+			<%
+		}
+		%>
+	</h2> 
 </body>
 </html>
